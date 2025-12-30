@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { slugify } from "@/lib/utils";
+import { X } from "lucide-react";
 import ImageUploadButton from "@/components/admin/posts/image-upload-button";
 
 export default function EditPostView() {
@@ -80,6 +81,13 @@ export default function EditPostView() {
         setFormData(prev => ({
             ...prev,
             content: prev.content + imageMarkdown
+        }));
+    };
+
+    const handleCoverImageUploaded = (url: string) => {
+        setFormData(prev => ({
+            ...prev,
+            coverImage: url
         }));
     };
 
@@ -196,12 +204,32 @@ export default function EditPostView() {
                                     </Select>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="coverImage">Cover Image URL</Label>
-                                    <Input
-                                        id="coverImage"
-                                        value={formData.coverImage}
-                                        onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
-                                    />
+                                    <Label>Cover Image</Label>
+                                    <div className="space-y-2">
+                                        <ImageUploadButton
+                                            onImageUploaded={handleCoverImageUploaded}
+                                            text="Upload Cover"
+                                            className="w-full"
+                                        />
+                                        {formData.coverImage && (
+                                            <div className="relative aspect-video w-full overflow-hidden rounded-lg border">
+                                                <img
+                                                    src={formData.coverImage}
+                                                    alt="Cover"
+                                                    className="object-cover w-full h-full"
+                                                />
+                                                <Button
+                                                    type="button"
+                                                    variant="ghost"
+                                                    size="icon"
+                                                    className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white"
+                                                    onClick={() => setFormData(prev => ({ ...prev, coverImage: "" }))}
+                                                >
+                                                    <X className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                                 <Button type="submit" className="w-full" disabled={saving}>
                                     {saving ? "Saving..." : "Update Post"}

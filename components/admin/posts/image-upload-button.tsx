@@ -9,9 +9,11 @@ import { toast } from "sonner";
 
 interface ImageUploadButtonProps {
     onImageUploaded: (url: string) => void;
+    className?: string;
+    text?: string;
 }
 
-export default function ImageUploadButton({ onImageUploaded }: ImageUploadButtonProps) {
+export default function ImageUploadButton({ onImageUploaded, className, text = "Insert Image" }: ImageUploadButtonProps) {
     const [uploading, setUploading] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -70,7 +72,7 @@ export default function ImageUploadButton({ onImageUploaded }: ImageUploadButton
                 type="button"
                 variant="outline"
                 size="sm"
-                className="gap-2"
+                className={`gap-2 ${className || ""}`}
                 disabled={uploading}
                 onClick={() => fileInputRef.current?.click()}
             >
@@ -79,7 +81,7 @@ export default function ImageUploadButton({ onImageUploaded }: ImageUploadButton
                 ) : (
                     <ImagePlus className="h-4 w-4" />
                 )}
-                {uploading ? "Uploading..." : "Insert Image"}
+                {uploading ? "Uploading..." : text}
             </Button>
         </>
     );
