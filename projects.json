@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "result": [
+    {
+      "projectId": "oks-website",
+      "projectNumber": "683149147730",
+      "displayName": "oksweb",
+      "name": "projects/oks-website",
+      "resources": {
+        "hostingSite": "oks-website",
+        "realtimeDatabaseInstance": "oks-website-default-rtdb"
+      },
+      "state": "ACTIVE",
+      "etag": "1_bcfbc271-c61a-4b4d-b700-9e3295ed8c16"
+    }
+  ]
+}

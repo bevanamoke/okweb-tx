@@ -1,0 +1,35 @@
+
+> my-v0-project@0.1.0 build
+> next build
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+   ▲ Next.js 16.0.3 (Turbopack)
+
+   Creating an optimized production build ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+ ✓ Compiled successfully in 12.3s
+   Skipping validation of types
+   Collecting page data using 7 workers ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+Firebase initialization failed (expected during build with dummy config): Error [FirebaseError]: Firebase: Error (auth/invalid-api-key).
+    at instantiateModule (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[turbopack]_runtime.js:715:9)
+    at getOrInstantiateModuleFromParent (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[turbopack]_runtime.js:738:12) {
+  code: 'auth/invalid-api-key',
+  customData: [Object]
+}
+Firebase initialization failed (expected during build with dummy config): Error [FirebaseError]: Firebase: Error (auth/invalid-api-key).
+    at instantiateModule (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[turbopack]_runtime.js:715:9)
+    at getOrInstantiateModuleFromParent (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[turbopack]_runtime.js:738:12) {
+  code: 'auth/invalid-api-key',
+  customData: [Object]
+}
+
+> Build error occurred
+Error: Page "/admin/posts/[id]/edit" is missing "generateStaticParams()" so it cannot be used with "output: export" config.
+    at ignore-listed frames

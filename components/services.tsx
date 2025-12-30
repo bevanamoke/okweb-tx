@@ -1,60 +1,85 @@
 "use client"
 
-import { GraduationCap, UtensilsCrossed, ArrowRight, CheckCircle2, TrendingUp } from "lucide-react"
+import { Database, Bot, Code, ArrowRight, CheckCircle2, TrendingUp, Zap, Monitor } from "lucide-react"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import Link from "next/link"
 import { useRef } from "react"
 
 const solutions = [
   {
-    id: "school-erp",
-    title: "School ERP",
-    subtitle: "Academic & Administrative Control",
-    description: "Designed for private schools, academies, colleges, and international institutions. We implement a fully integrated academic and finance system that gives administrators, teachers, parents, and students real-time visibility.",
-    icon: GraduationCap,
+    id: "odoo-implementation",
+    title: "Odoo Implementation",
+    subtitle: "Unified ERP Systems",
+    description: "End-to-end Odoo implementation tailored to your unique business processes. We transform fragmented operations into a single, cohesive system.",
+    icon: Database,
     capabilities: [
-      "Student admission & enrollment",
-      "Fees billing, invoicing, and reconciliation",
-      "Exams, grading, and report cards",
-      "Parent & student portals",
-      "Attendance and discipline tracking",
-      "Staff payroll and HR",
-      "Academic calendar and communications",
+      "Full System Configuration",
+      "Process Mapping",
+      "Data Migration & Cleaning",
+      "Custom Module Development",
+      "User Training & Support",
+      "Workflow Optimization",
+      "Financial Reporting Setup",
     ],
     outcomes: [
-      "Reduced fee leakage",
-      "Faster reporting",
-      "Clear accountability",
-      "Improved parent trust",
+      "Centralized Operations",
+      "Real-time Data Visibility",
+      "Scalable Infrastructure",
+      "Reduced Manual Entry",
     ],
-    link: "/school_erp",
-    cta: "View School ERP",
+    link: "/odoo",
+    cta: "Explore Odoo Services",
     color: "primary",
   },
   {
-    id: "hospitality-erp",
-    title: "Hospitality ERP",
-    subtitle: "Restaurants, Bars & Hotels",
-    description: "Built for fast-moving hospitality environments where delays cost money. We deploy Odoo-based hospitality systems that unify front-of-house and back-office operations.",
-    icon: UtensilsCrossed,
+    id: "automation-services",
+    title: "Automation Services",
+    subtitle: "AI & Workflow Automation",
+    description: "Streamline workflows and eliminate repetitive tasks. We connect your apps and automate business logic to free up your team for high-value work.",
+    icon: Bot,
     capabilities: [
-      "POS integration",
-      "Inventory & stock control",
-      "Recipe costing & wastage tracking",
-      "Supplier & purchase management",
-      "Accounting & cash flow visibility",
-      "Staff scheduling & payroll",
-      "Multi-branch reporting",
+      "AI-Powered Workflows",
+      "App Integration (Zapier/Make)",
+      "Custom API Connectors",
+      "Chatbot Implementation",
+      "Automated Reporting",
+      "Lead Management Automation",
+      "Process Analysis",
     ],
     outcomes: [
-      "Controlled costs",
-      "Accurate margins",
-      "Real-time operational insight",
-      "Scalable growth across outlets",
+      "Reduced Operational Costs",
+      "Eliminated Human Error",
+      "24/7 Productivity",
+      "Faster Turnaround Times",
     ],
-    link: "/hospitality_erp",
-    cta: "View Hospitality ERP",
+    link: "/ai-automation",
+    cta: "View Automation",
     color: "accent",
+  },
+  {
+    id: "web-development",
+    title: "Web Development",
+    subtitle: "High-Performance Digital Experiences",
+    description: "Modern websites and web applications built for speed, SEO, and conversion using cutting-edge technologies.",
+    icon: Code,
+    capabilities: [
+      "Next.js & React Applications",
+      "Custom UI/UX Design",
+      "Headless CMS Integration",
+      "E-commerce Solutions",
+      "Progressive Web Apps (PWA)",
+      "Performance Optimization",
+      "SEO Best Practices",
+    ],
+    outcomes: [
+      "Enhanced Brand Authority",
+      "Higher Conversion Rates",
+      "Seamless User Experience",
+      "Mobile-First Design",
+    ],
+    link: "/web-app-development",
+    cta: "See Web Solutions",
+    color: "primary",
   },
 ]
 
@@ -69,7 +94,7 @@ export default function Services() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold mb-6"
           >
-            Our Core ERP Solutions
+            Empowering Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Digital Evolution</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -78,7 +103,7 @@ export default function Services() {
             transition={{ delay: 0.1 }}
             className="text-xl text-foreground/70 max-w-2xl mx-auto"
           >
-            Specialized systems for high-performance institutions.
+            Comprehensive solutions to modernize, automate, and scale your business.
           </motion.p>
         </div>
 

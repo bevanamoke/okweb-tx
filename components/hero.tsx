@@ -42,9 +42,9 @@ export default function Hero() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-6">
-              OKS — Odoo Systems{" "}
+              OKS — Your Partners In{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-                That Actually Work
+                Digital Transformation
               </span>
             </h1>
           </motion.div>
@@ -55,7 +55,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="text-xl md:text-2xl text-foreground/80 mb-8 max-w-2xl mx-auto leading-relaxed"
           >
-            We design, implement, and optimize Odoo ERP systems for institutions that cannot afford operational failure.
+            We specialize in Odoo Implementation, Automation Services, and Web Development to modernize your business operations and drive growth.
           </motion.p>
 
           <motion.div

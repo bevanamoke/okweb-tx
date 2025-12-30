@@ -31,8 +31,11 @@ export default function Header() {
           <Link href="/web-app-development" className="text-sm text-foreground/80 hover:text-foreground transition">
             Web & App Development
           </Link>
-          <Link href="/industries" className="text-sm text-foreground/80 hover:text-foreground transition">
-            Industries
+          <Link href="/about" className="text-sm text-foreground/80 hover:text-foreground transition">
+            About Us
+          </Link>
+          <Link href="/blog" className="text-sm text-foreground/80 hover:text-foreground transition">
+            Blog
           </Link>
         </div>
 
@@ -63,8 +66,11 @@ export default function Header() {
               <Link href="/web-app-development" className="text-sm text-foreground/80">
                 Web & App Development
               </Link>
-              <Link href="/industries" className="text-sm text-foreground/80">
-                Industries
+              <Link href="/about" className="text-sm text-foreground/80">
+                About Us
+              </Link>
+              <Link href="/blog" className="text-sm text-foreground/80">
+                Blog
               </Link>
               <Button asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                 <Link href="https://calendly.com/omnitechkernelsolutions/30min" target="_blank" rel="noopener noreferrer">

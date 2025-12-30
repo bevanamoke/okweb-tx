@@ -4,6 +4,8 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { AuthProvider } from "@/contexts/AuthContext"
+import { Toaster } from "@/components/ui/sonner"
 import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
@@ -28,10 +30,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body className={`font-sans antialiased`}>
-        <Header />
-        {children}
-        <Footer />
-        <Analytics />
+        <AuthProvider>
+          <Header />
+          {children}
+          <Footer />
+          <Analytics />
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   )

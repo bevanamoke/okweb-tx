@@ -1,0 +1,159 @@
+[2025-12-16T08:08:48.123Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[2025-12-16T08:08:48.124Z] > authorizing via signed-in user (bievanamoke1@gmail.com)
+[2025-12-16T08:08:48.125Z] [iam] checking project oks-website for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[2025-12-16T08:08:48.127Z] Checked if tokens are valid: true, expires at: 1765875357862
+[2025-12-16T08:08:48.127Z] Checked if tokens are valid: true, expires at: 1765875357862
+[2025-12-16T08:08:48.129Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/oks-website:testIamPermissions [none]
+[2025-12-16T08:08:48.129Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/oks-website:testIamPermissions x-goog-quota-user=projects/oks-website
+[2025-12-16T08:08:48.130Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/oks-website:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[2025-12-16T08:08:49.545Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/oks-website:testIamPermissions 200
+[2025-12-16T08:08:49.546Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/oks-website:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[2025-12-16T08:08:49.547Z] Checked if tokens are valid: true, expires at: 1765875357862
+[2025-12-16T08:08:49.547Z] Checked if tokens are valid: true, expires at: 1765875357862
+[2025-12-16T08:08:49.548Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/oks-website [none]
+[2025-12-16T08:08:50.910Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/oks-website 200
+[2025-12-16T08:08:50.910Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/oks-website {"projectId":"oks-website","projectNumber":"683149147730","displayName":"oksweb","name":"projects/oks-website","resources":{"hostingSite":"oks-website","realtimeDatabaseInstance":"oks-website-default-rtdb"},"state":"ACTIVE","etag":"1_bcfbc271-c61a-4b4d-b700-9e3295ed8c16"}
+[2025-12-16T08:08:56.625Z] Checked if tokens are valid: true, expires at: 1765875357862
+[2025-12-16T08:08:56.625Z] Checked if tokens are valid: true, expires at: 1765875357862
+[2025-12-16T08:08:56.626Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/oks-website/sites pageToken=&pageSize=10
+[2025-12-16T08:08:58.243Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/oks-website/sites 200
+[2025-12-16T08:08:58.243Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/oks-website/sites {"sites":[{"name":"projects/oks-website/sites/oks-website","defaultUrl":"https://oks-website.web.app","appId":"1:683149147730:web:ab64f75cf2d6ff000ae98b","type":"DEFAULT_SITE"}]}
+[2025-12-16T08:08:58.243Z] Checked if tokens are valid: true, expires at: 1765875357862
+[2025-12-16T08:08:58.244Z] Checked if tokens are valid: true, expires at: 1765875357862
+[2025-12-16T08:08:58.244Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:683149147730:web:ab64f75cf2d6ff000ae98b/config [none]
+[2025-12-16T08:08:59.403Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:683149147730:web:ab64f75cf2d6ff000ae98b/config 200
+[2025-12-16T08:08:59.403Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:683149147730:web:ab64f75cf2d6ff000ae98b/config {"projectId":"oks-website","appId":"1:683149147730:web:ab64f75cf2d6ff000ae98b","databaseURL":"https://oks-website-default-rtdb.europe-west1.firebasedatabase.app","storageBucket":"oks-website.firebasestorage.app","apiKey":"AIzaSyAGgtSPL3w0d-AoVme6tX6GLafBCJJesxU","authDomain":"oks-website.firebaseapp.com","messagingSenderId":"683149147730","measurementId":"G-S2BFT1DCD2","projectNumber":"683149147730","version":"2"}
+
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[2025-12-16T08:09:10.524Z] Checked if tokens are valid: true, expires at: 1765875357862
+[2025-12-16T08:09:10.524Z] Checked if tokens are valid: true, expires at: 1765875357862
+[2025-12-16T08:09:10.524Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/oks-website/sites/oks-website [none]
+[2025-12-16T08:09:11.419Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/oks-website/sites/oks-website 200
+[2025-12-16T08:09:11.419Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/oks-website/sites/oks-website {"name":"projects/oks-website/sites/oks-website","defaultUrl":"https://oks-website.web.app","appId":"1:683149147730:web:ab64f75cf2d6ff000ae98b","type":"DEFAULT_SITE"}
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+   ▲ Next.js 16.0.3 (Turbopack)
+
+
+
+   Creating an optimized production build ...
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+
+
+[430.23ms] [@tailwindcss/postcss] app\globals.css
+[  0.14ms]   ↳ Quick bail check
+[ 78.35ms]   ↳ Setup compiler
+
+[  0.81ms]     ↳ PostCSS AST -> Tailwind CSS AST
+
+[ 77.50ms]     ↳ Create compiler
+
+[  0.54ms]   ↳ Register full rebuild paths
+[  4.21ms]   ↳ Setup scanner
+
+[ 53.09ms]   ↳ Scan for candidates
+
+[ 94.24ms]   ↳ Register dependency messages
+
+[115.65ms]   ↳ Build utilities
+[ 69.26ms]   ↳ Optimization
+[  2.65ms]     ↳ AST -> CSS
+[ 34.70ms]     ↳ Lightning CSS
+[ 31.85ms]     ↳ CSS -> PostCSS AST
+
+[ 13.90ms]   ↳ Update PostCSS AST
+
+
+ ✓ Compiled successfully in 15.1s
+
+   Skipping validation of types
+
+   Collecting page data using 7 workers ...
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+   Generating static pages using 7 workers (0/17) ...
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+Firebase initialization failed (expected during build with dummy config): Error [FirebaseError]: Firebase: Error (auth/invalid-api-key).
+    at p (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:33426)
+    at q (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:33474)
+    at aa.instanceFactory (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:84659)
+    at ac.getOrInitializeService (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:13417)
+    at ac.initialize (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:12825)
+    at aJ (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:71427)
+    at br (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:85391)
+    at module evaluation (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:13:10634)
+    at instantiateModule (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[turbopack]_runtime.js:715:9)
+    at getOrInstantiateModuleFromParent (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[turbopack]_runtime.js:738:12) {
+  code: 'auth/invalid-api-key',
+  customData: [Object]
+}
+
+   Generating static pages using 7 workers (4/17) 
+
+   Generating static pages using 7 workers (8/17) 
+
+   Generating static pages using 7 workers (12/17) 
+
+ ✓ Generating static pages using 7 workers (17/17) in 2.9s
+
+   Finalizing page optimization ...
+
+
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /admin/dashboard
+├ ƒ /admin/posts/[id]/edit
+├ ○ /admin/posts/create
+├ ○ /admin/profile
+├ ○ /ai-automation
+├ ƒ /api/submit-quote
+├ ƒ /author/[id]
+├ ○ /blog
+├ ƒ /blog/[slug]
+├ ○ /hospitality_erp
+├ ○ /industries
+├ ○ /login
+├ ○ /odoo
+├ ○ /quote
+├ ○ /school_erp
+├ ○ /thank-you
+└ ○ /web-app-development
+
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+
+Error: Next.js version 16.0.3 is vulnerable to CVE-2025-66478.
+Please upgrade to a patched version: 16.0.7+.
+See https://nextjs.org/blog/CVE-2025-66478 for more details.

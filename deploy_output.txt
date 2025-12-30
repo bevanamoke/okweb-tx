@@ -1,0 +1,103 @@
+
+   Thank you for trying our [3mearly preview[23m of Next.js support on Firebase Hosting.
+   [31mDuring the preview, support is best-effort and breaking changes can be expected. Proceed with caution.[39m[33m
+   The integration is known to work with Next.js version [3m12 - 15.0[23m. You may encounter errors.[39m
+
+   [1mDocumentation:[22m https://firebase.google.com/docs/hosting/frameworks/nextjs
+   [1mFile a bug:[22m https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   [1mSubmit a feature request:[22m https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+   ▲ Next.js 16.0.3 (Turbopack)
+
+
+
+   Creating an optimized production build ...
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+ ✓ Compiled successfully in 14.2s
+
+   Skipping validation of types
+
+   Collecting page data using 7 workers ...
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+   Generating static pages using 7 workers (0/17) ...
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+Firebase initialization failed (expected during build with dummy config): Error [FirebaseError]: Firebase: Error (auth/invalid-api-key).
+    at p (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:33426)
+    at q (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:33474)
+    at aa.instanceFactory (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:84659)
+    at ac.getOrInitializeService (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:13417)
+    at ac.initialize (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:12825)
+    at aJ (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:71427)
+    at br (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:1:85391)
+    at module evaluation (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[root-of-the-server]__e81421d5._.js:13:10634)
+    at instantiateModule (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[turbopack]_runtime.js:715:9)
+    at getOrInstantiateModuleFromParent (C:\Users\Administrator\Desktop\oks website\.next\server\chunks\ssr\[turbopack]_runtime.js:738:12) {
+  code: 'auth/invalid-api-key',
+  customData: [Object]
+}
+
+   Generating static pages using 7 workers (4/17) 
+
+   Generating static pages using 7 workers (8/17) 
+
+   Generating static pages using 7 workers (12/17) 
+
+ ✓ Generating static pages using 7 workers (17/17) in 2.4s
+
+   Finalizing page optimization ...
+
+
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /admin/dashboard
+├ ƒ /admin/posts/[id]/edit
+├ ○ /admin/posts/create
+├ ○ /admin/profile
+├ ○ /ai-automation
+├ ƒ /api/submit-quote
+├ ƒ /author/[id]
+├ ○ /blog
+├ ƒ /blog/[slug]
+├ ○ /hospitality_erp
+├ ○ /industries
+├ ○ /login
+├ ○ /odoo
+├ ○ /quote
+├ ○ /school_erp
+├ ○ /thank-you
+└ ○ /web-app-development
+
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+
+[1m[31mError:[39m[22m Next.js version 16.0.3 is vulnerable to CVE-2025-66478.
+Please upgrade to a patched version: 16.0.7+.
+See https://nextjs.org/blog/CVE-2025-66478 for more details.
