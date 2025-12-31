@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -15,11 +15,13 @@ import { toast } from "sonner";
 import { slugify } from "@/lib/utils";
 import { X } from "lucide-react";
 import ImageUploadButton from "@/components/admin/posts/image-upload-button";
+import MarkdownToolbar from "@/components/admin/posts/markdown-toolbar";
 
 export default function CreatePostPage() {
     const { user } = useAuth();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    const contentRef = useRef<HTMLTextAreaElement>(null);
 
     const [formData, setFormData] = useState({
         title: "",
@@ -54,6 +56,36 @@ export default function CreatePostPage() {
             ...prev,
             coverImage: url
         }));
+    };
+
+    const handleToolbarInsert = (startTag: string, endTag?: string) => {
+        const textarea = contentRef.current;
+        if (!textarea) return;
+
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const text = textarea.value;
+        const selectedText = text.substring(start, end);
+
+        let newText = "";
+        let newCursorPos = 0;
+
+        if (endTag) {
+            // Wrapping
+            newText = text.substring(0, start) + startTag + selectedText + endTag + text.substring(end);
+            newCursorPos = start + startTag.length + selectedText.length + endTag.length;
+        } else {
+            // Insertion
+            newText = text.substring(0, start) + startTag + text.substring(end);
+            newCursorPos = start + startTag.length;
+        }
+
+        setFormData(prev => ({ ...prev, content: newText }));
+
+        setTimeout(() => {
+            textarea.focus();
+            textarea.setSelectionRange(newCursorPos, newCursorPos);
+        }, 0);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -125,18 +157,22 @@ export default function CreatePostPage() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <div className="flex justify-between items-center">
+                                    <div className="flex justify-between items-end mb-2">
                                         <Label htmlFor="content">Content</Label>
                                         <ImageUploadButton onImageUploaded={handleImageUploaded} />
                                     </div>
-                                    <Textarea
-                                        id="content"
-                                        value={formData.content}
-                                        onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                                        required
-                                        placeholder="Write your article content here (Markdown or HTML)..."
-                                        className="min-h-[400px] font-mono"
-                                    />
+                                    <div className="border rounded-md">
+                                        <MarkdownToolbar onInsert={handleToolbarInsert} />
+                                        <Textarea
+                                            ref={contentRef}
+                                            id="content"
+                                            value={formData.content}
+                                            onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                                            required
+                                            placeholder="Write your article content here (Markdown or HTML)..."
+                                            className="min-h-[400px] font-mono border-0 focus-visible:ring-0 rounded-none rounded-b-md resize-y"
+                                        />
+                                    </div>
                                     <p className="text-xs text-muted-foreground">
                                         Supports Markdown. To add an inline image, use: <code className="bg-muted px-1 py-0.5 rounded">![Alt Text](Image URL)</code>
                                     </p>

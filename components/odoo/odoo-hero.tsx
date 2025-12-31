@@ -36,9 +36,14 @@ export default function OdooHero() {
                   Get Started <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
+              <Button size="lg" variant="secondary" className="h-12 px-8 text-base shadow-lg hover:bg-secondary/90 transition-all duration-300 transform hover:scale-105" asChild>
+                <Link href="https://erp.oks.co.ke" target="_blank" rel="noopener noreferrer">
+                  Try Demo
+                </Link>
+              </Button>
               <Button size="lg" variant="outline" className="h-12 px-8 text-base border-2 hover:bg-primary/5" asChild>
                 <Link href="#services">
-                  View Our Services
+                  View Services
                 </Link>
               </Button>
             </div>

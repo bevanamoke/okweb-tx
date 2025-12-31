@@ -33,9 +33,14 @@ export default function OdooCTA() {
                 Get Your Free Quote <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
+            <Button size="lg" variant="secondary" className="h-14 px-10 text-lg shadow-lg hover:bg-secondary/90" asChild>
+              <Link href="https://erp.oks.co.ke" target="_blank" rel="noopener noreferrer">
+                Try Demo
+              </Link>
+            </Button>
             <Button size="lg" variant="outline" className="h-14 px-10 text-lg border-2" asChild>
               <Link href="#services">
-                Explore Our Services
+                Explore Services
               </Link>
             </Button>
           </div>

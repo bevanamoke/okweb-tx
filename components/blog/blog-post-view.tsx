@@ -10,6 +10,7 @@ import { Calendar, User, ArrowLeft, Share2 } from "lucide-react";
 import { format } from "date-fns";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 interface Post {
     id: string;
@@ -127,6 +128,7 @@ export default function BlogPostView({ slug }: BlogPostViewProps) {
                 <div className="prose prose-lg dark:prose-invert max-w-none">
                     <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeRaw]}
                         components={{
                             img: ({ ...props }) => (
                                 <span className="block my-8">
