@@ -16,12 +16,12 @@ import { slugify } from "@/lib/utils";
 import { X } from "lucide-react";
 import ImageUploadButton from "@/components/admin/posts/image-upload-button";
 import RichTextEditor from "@/components/admin/posts/rich-text-editor";
+import { uploadBlogImage } from "@/lib/image-upload";
 
 export default function CreatePostPage() {
     const { user } = useAuth();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const contentRef = useRef<HTMLTextAreaElement>(null);
 
     const [formData, setFormData] = useState({
         title: "",
@@ -123,20 +123,7 @@ export default function CreatePostPage() {
                                     <RichTextEditor
                                         content={formData.content}
                                         onChange={(content) => setFormData({ ...formData, content })}
-                                        onImageUpload={async (file) => {
-                                            // We can reuse the logic from ImageUploadButton via a ref or just keep it simple.
-                                            // For now, let's keep it simple and maybe implement a helper function later if needed, 
-                                            // but ideally RichTextEditor handles the UI and we just provide the upload function.
-                                            // Since we don't have the storage logic easily extractable without refactoring ImageUploadButton,
-                                            // let's just stick to letting RichTextEditor prompt for now OR better:
-                                            // Refactor ImageUploadButton logic to a hook or utility?
-                                            // Or just copy-paste the upload logic here since it IS the page logic.
-
-                                            // NOTE: For now, I'll pass undefined to fall back to URL prompt to ensure stability first
-                                            // or I can try to use a quick inline upload if you prefer. 
-                                            // Let's use the URL prompt fallback for now as it's safe.
-                                            return "";
-                                        }}
+                                        onImageUpload={uploadBlogImage}
                                     />
                                 </div>
                             </CardContent>

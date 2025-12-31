@@ -16,6 +16,7 @@ import { slugify } from "@/lib/utils";
 import { X } from "lucide-react";
 import ImageUploadButton from "@/components/admin/posts/image-upload-button";
 import RichTextEditor from "@/components/admin/posts/rich-text-editor";
+import { uploadBlogImage } from "@/lib/image-upload";
 
 export default function EditPostView() {
     const { user, isAdmin, isEditor } = useAuth();
@@ -163,9 +164,7 @@ export default function EditPostView() {
                                     <RichTextEditor
                                         content={formData.content}
                                         onChange={(content) => setFormData({ ...formData, content })}
-                                        onImageUpload={async (file) => {
-                                            return "";
-                                        }}
+                                        onImageUpload={uploadBlogImage}
                                     />
                                 </div>
                             </CardContent>

@@ -50,6 +50,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
         <div className="border-b p-2 flex flex-wrap gap-1 bg-muted/20 items-center">
             <div className="flex gap-1 border-r pr-2 mr-2">
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -61,6 +62,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
                     <Bold className="h-4 w-4" />
                 </Button>
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -71,6 +73,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
                     <Italic className="h-4 w-4" />
                 </Button>
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -83,6 +86,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
 
             <div className="flex gap-1 border-r pr-2 mr-2">
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -92,6 +96,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
                     <Heading1 className="h-4 w-4" />
                 </Button>
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -101,6 +106,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
                     <Heading2 className="h-4 w-4" />
                 </Button>
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -113,6 +119,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
 
             <div className="flex gap-1 border-r pr-2 mr-2">
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -122,6 +129,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
                     <AlignLeft className="h-4 w-4" />
                 </Button>
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -131,6 +139,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
                     <AlignCenter className="h-4 w-4" />
                 </Button>
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -143,6 +152,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
 
             <div className="flex gap-1 border-r pr-2 mr-2">
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -152,6 +162,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
                     <List className="h-4 w-4" />
                 </Button>
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -161,6 +172,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
                     <ListOrdered className="h-4 w-4" />
                 </Button>
                 <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8"
@@ -172,16 +184,16 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
             </div>
 
             <div className="flex gap-1">
-                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={setLink} title="Link" style={{ backgroundColor: editor.isActive('link') ? 'rgba(0,0,0,0.1)' : 'transparent' }}>
+                <Button type="button" variant="ghost" size="icon" className="h-8 w-8" onClick={setLink} title="Link" style={{ backgroundColor: editor.isActive('link') ? 'rgba(0,0,0,0.1)' : 'transparent' }}>
                     <LinkIcon className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={addImage} title="Image">
+                <Button type="button" variant="ghost" size="icon" className="h-8 w-8" onClick={addImage} title="Image">
                     <ImageIcon className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => editor.chain().focus().undo().run()} disabled={!editor.can().chain().focus().undo().run()} title="Undo">
+                <Button type="button" variant="ghost" size="icon" className="h-8 w-8" onClick={() => editor.chain().focus().undo().run()} disabled={!editor.can().chain().focus().undo().run()} title="Undo">
                     <Undo className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => editor.chain().focus().redo().run()} disabled={!editor.can().chain().focus().redo().run()} title="Redo">
+                <Button type="button" variant="ghost" size="icon" className="h-8 w-8" onClick={() => editor.chain().focus().redo().run()} disabled={!editor.can().chain().focus().redo().run()} title="Redo">
                     <Redo className="h-4 w-4" />
                 </Button>
             </div>
