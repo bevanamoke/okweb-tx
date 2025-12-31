@@ -53,7 +53,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
     }
 
     return (
-        <div className="border-b p-2 flex flex-wrap gap-1 bg-muted/20 items-center">
+        <div className="sticky top-0 z-20 border-b p-2 flex flex-wrap gap-1 bg-background/95 backdrop-blur-sm items-center shadow-sm">
             <div className="flex gap-1 border-r pr-2 mr-2">
                 <Button
                     type="button"
@@ -290,7 +290,7 @@ export default function RichTextEditor({ content, onChange, onImageUpload }: Ric
     }
 
     return (
-        <div className="border rounded-md overflow-hidden bg-background">
+        <div className="border rounded-md bg-background relative">
             <MenuBar editor={editor} addImage={handleImageUpload} />
             <EditorContent editor={editor} />
         </div>
