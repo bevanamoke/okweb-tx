@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { doc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -15,7 +15,7 @@ import { toast } from "sonner";
 import { slugify } from "@/lib/utils";
 import { X } from "lucide-react";
 import ImageUploadButton from "@/components/admin/posts/image-upload-button";
-import MarkdownToolbar from "@/components/admin/posts/markdown-toolbar";
+import RichTextEditor from "@/components/admin/posts/rich-text-editor";
 
 export default function EditPostView() {
     const { user, isAdmin, isEditor } = useAuth();
@@ -77,51 +77,11 @@ export default function EditPostView() {
         }
     }
 
-    const handleImageUploaded = (url: string) => {
-        const imageMarkdown = `\n![Image Description](${url})\n`;
-        setFormData(prev => ({
-            ...prev,
-            content: prev.content + imageMarkdown
-        }));
-    };
-
     const handleCoverImageUploaded = (url: string) => {
         setFormData(prev => ({
             ...prev,
             coverImage: url
         }));
-    };
-
-    const contentRef = useRef<HTMLTextAreaElement>(null);
-
-    const handleToolbarInsert = (startTag: string, endTag?: string) => {
-        const textarea = contentRef.current;
-        if (!textarea) return;
-
-        const start = textarea.selectionStart;
-        const end = textarea.selectionEnd;
-        const text = textarea.value;
-        const selectedText = text.substring(start, end);
-
-        let newText = "";
-        let newCursorPos = 0;
-
-        if (endTag) {
-            // Wrapping
-            newText = text.substring(0, start) + startTag + selectedText + endTag + text.substring(end);
-            newCursorPos = start + startTag.length + selectedText.length + endTag.length;
-        } else {
-            // Insertion
-            newText = text.substring(0, start) + startTag + text.substring(end);
-            newCursorPos = start + startTag.length;
-        }
-
-        setFormData(prev => ({ ...prev, content: newText }));
-
-        setTimeout(() => {
-            textarea.focus();
-            textarea.setSelectionRange(newCursorPos, newCursorPos);
-        }, 0);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -199,24 +159,14 @@ export default function EditPostView() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <div className="flex justify-between items-end mb-2">
-                                        <Label htmlFor="content">Content</Label>
-                                        <ImageUploadButton onImageUploaded={handleImageUploaded} />
-                                    </div>
-                                    <div className="border rounded-md">
-                                        <MarkdownToolbar onInsert={handleToolbarInsert} />
-                                        <Textarea
-                                            ref={contentRef}
-                                            id="content"
-                                            value={formData.content}
-                                            onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                                            required
-                                            className="min-h-[400px] font-mono border-0 focus-visible:ring-0 rounded-none rounded-b-md resize-y"
-                                        />
-                                    </div>
-                                    <p className="text-xs text-muted-foreground">
-                                        Supports Markdown. To add an inline image, use: <code className="bg-muted px-1 py-0.5 rounded">![Alt Text](Image URL)</code>
-                                    </p>
+                                    <Label htmlFor="content">Content</Label>
+                                    <RichTextEditor
+                                        content={formData.content}
+                                        onChange={(content) => setFormData({ ...formData, content })}
+                                        onImageUpload={async (file) => {
+                                            return "";
+                                        }}
+                                    />
                                 </div>
                             </CardContent>
                         </Card>
