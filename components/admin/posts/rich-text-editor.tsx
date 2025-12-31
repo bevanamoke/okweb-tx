@@ -15,6 +15,12 @@ import {
     Undo, Redo, Link as LinkIcon, Image as ImageIcon
 } from "lucide-react"
 import { useEffect } from 'react'
+import Placeholder from '@tiptap/extension-placeholder'
+import ListItem from '@tiptap/extension-list-item'
+import BulletList from '@tiptap/extension-bullet-list'
+import OrderedList from '@tiptap/extension-ordered-list'
+import Heading from '@tiptap/extension-heading'
+import Blockquote from '@tiptap/extension-blockquote'
 
 interface RichTextEditorProps {
     content: string;
@@ -204,14 +210,34 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
 export default function RichTextEditor({ content, onChange, onImageUpload }: RichTextEditorProps) {
     const editor = useEditor({
         extensions: [
-            StarterKit,
+            StarterKit.configure({
+                heading: false,
+                bulletList: false,
+                orderedList: false,
+                listItem: false,
+                blockquote: false,
+            }),
+            Heading.configure({
+                levels: [1, 2, 3],
+            }),
+            Blockquote,
+            BulletList,
+            OrderedList,
+            ListItem,
             Underline,
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
             }),
-            Image,
+            Image.configure({
+                HTMLAttributes: {
+                    class: 'rounded-lg max-w-full h-auto',
+                },
+            }),
             Link.configure({
                 openOnClick: false,
+            }),
+            Placeholder.configure({
+                placeholder: 'Write something amazing...',
             }),
         ],
         content: content,
@@ -220,7 +246,7 @@ export default function RichTextEditor({ content, onChange, onImageUpload }: Ric
         },
         editorProps: {
             attributes: {
-                class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none min-h-[400px] p-4 max-w-none',
+                class: 'tiptap focus:outline-none min-h-[400px] p-4 max-w-none',
             },
         },
     })
