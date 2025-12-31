@@ -21,6 +21,8 @@ import BulletList from '@tiptap/extension-bullet-list'
 import OrderedList from '@tiptap/extension-ordered-list'
 import Heading from '@tiptap/extension-heading'
 import Blockquote from '@tiptap/extension-blockquote'
+import BubbleMenuExtension from '@tiptap/extension-bubble-menu'
+import FloatingMenuExtension from '@tiptap/extension-floating-menu'
 
 interface RichTextEditorProps {
     content: string;
@@ -53,7 +55,7 @@ const MenuBar = ({ editor, addImage }: { editor: any, addImage: () => void }) =>
     }
 
     return (
-        <div className="sticky top-0 z-20 border-b p-2 flex flex-wrap gap-1 bg-background/95 backdrop-blur-sm items-center shadow-sm">
+        <div className="sticky top-[80px] z-20 m-2 border rounded-lg p-2 flex flex-wrap gap-1 bg-background/95 backdrop-blur-sm items-center shadow-xl ring-1 ring-border transition-all duration-200">
             <div className="flex gap-1 border-r pr-2 mr-2">
                 <Button
                     type="button"
@@ -238,6 +240,12 @@ export default function RichTextEditor({ content, onChange, onImageUpload }: Ric
             }),
             Placeholder.configure({
                 placeholder: 'Write something amazing...',
+            }),
+            BubbleMenuExtension.configure({
+                element: null, // React components handle this
+            }),
+            FloatingMenuExtension.configure({
+                element: null, // React components handle this
             }),
         ],
         content: content,
