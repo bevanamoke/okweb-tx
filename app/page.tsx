@@ -4,6 +4,7 @@ import Services from "@/components/services"
 import WhyChooseOKS from "@/components/why-choose-oks"
 import Process from "@/components/process"
 import Testimonials from "@/components/testimonials"
+import BlogSection from "@/components/blog-section"
 import CTA from "@/components/cta"
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <WhyChooseOKS />
       <Process />
       <Testimonials />
+      <BlogSection />
       <CTA />
     </main>
   )

@@ -6,22 +6,22 @@ import Image from "next/image"
 
 const teamMembers = [
     {
-        name: "Bevan Amoke",
-        role: "Co-Founder & Director",
-        title: "Software Developer",
-        image: "/team/bevan-amoke.jpg",
+        name: "Eddy Akurwa",
+        role: "Co-Founder & Managing Director",
+        title: "Software Engineer",
+        image: "/team/eddy-amoke.jpg",
         description:
-            "Bevan oversees the strategic direction and day-to-day operations of OKS. As a software developer, he coordinates project delivery, internal operations, and client engagements while ensuring that technical solutions align with business objectives.",
+            "Eddy oversees the strategic direction and day-to-day operations of OKS. As a software engineer, he coordinates project delivery, internal operations, and client engagements while ensuring that technical solutions align with business objectives.",
         focus:
             "He plays a key role in translating business needs into practical, well-executed systems and maintaining execution standards across the organization.",
     },
     {
-        name: "Eddy Akurwa",
+        name: "Bevan Amoke",
         role: "Co-Founder & Chief Technology Officer (CTO)",
-        title: "Software Engineer",
-        image: "/team/eddy-amoke.jpg",
+        title: "Software Developer",
+        image: "/team/bevan-amoke.jpg",
         description:
-            "Eddy leads the technical vision and engineering strategy at OKS. As Co-Founder and CTO, he is responsible for system architecture, software design, security, performance, and scalability across all OKS solutions.",
+            "Bevan leads the technical vision and engineering strategy at OKS. As Co-Founder and CTO, he is responsible for system architecture, software design, security, performance, and scalability across all OKS solutions.",
         focus:
             "He oversees complex implementations and ensures that all platforms — including ERP systems, applications, and AI automation workflows — are robust, secure, and future-ready.",
     },

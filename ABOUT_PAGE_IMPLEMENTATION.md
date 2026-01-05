@@ -40,9 +40,9 @@ Successfully created a comprehensive About Us page for OKS (Omnitech Kernel Solu
 
 #### e) About Team (`components/about/about-team.tsx`)
 - Detailed profiles for all 5 team members:
-  1. **Bevan Amoke** - Co-Founder & Director | Software Developer
-  2. **Eddy Amoke** - Co-Founder & CTO | Software Engineer
-  3. **Sheryl Amoke** - Co-Founder | PR & Sales Representative
+  1. **Eddy Akurwa** - Co-Founder & Managing Director | Software Engineer
+  2. **Bevan Amoke** - Co-Founder & CTO | Software Developer
+  3. **Sheryl Dormah** - Co-Founder | PR & Sales Representative
   4. **Brian Gisemba** - Sales Director
   5. **Moses Gituru** - Accountant
 - Each profile includes role, title, description, and focus area

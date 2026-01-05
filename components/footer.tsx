@@ -86,10 +86,10 @@ export default function Footer() {
         <div className="border-t border-border/30 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-foreground/50">
           <p>&copy; 2025 OmniTech Kernel Solutions. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <Link href="#" className="hover:text-primary transition">
+            <Link href="/privacy" className="hover:text-primary transition">
               Privacy Policy
             </Link>
-            <Link href="#" className="hover:text-primary transition">
+            <Link href="/terms" className="hover:text-primary transition">
               Terms of Service
             </Link>
           </div>
