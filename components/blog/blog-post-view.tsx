@@ -6,16 +6,18 @@ import Link from "next/link";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
-import { Calendar, User, ArrowLeft, Share2 } from "lucide-react";
+import { Calendar, User, ArrowLeft } from "lucide-react";
 import { format } from "date-fns";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import ShareDialog from "@/components/ui/share-dialog";
 
 interface Post {
     id: string;
     title: string;
     content: string;
+    excerpt?: string;
     coverImage: string;
     authorName: string;
     authorPhoto?: string;
@@ -174,9 +176,11 @@ export default function BlogPostView({ slug }: BlogPostViewProps) {
             <div className="container max-w-4xl mx-auto py-8 border-t">
                 <div className="flex justify-between items-center">
                     <p className="text-muted-foreground">Thanks for reading!</p>
-                    <Button variant="outline" size="sm">
-                        <Share2 className="mr-2 h-4 w-4" /> Share Article
-                    </Button>
+                    <ShareDialog
+                        url={`/blog/view?slug=${slug}`}
+                        title={post.title}
+                        description={post.excerpt}
+                    />
                 </div>
             </div>
         </div>
