@@ -226,8 +226,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT — Status panel */}
+          {/* RIGHT — Status panel (desktop only) */}
           <div
+            className="hidden lg:block"
             style={{
               border: "1px solid #1A2E44",
               background: "#0D1420",
@@ -376,6 +377,7 @@ export default function Hero() {
           }}
         >
           <div
+            className="hero-stats-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",

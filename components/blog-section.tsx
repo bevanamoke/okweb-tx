@@ -1,165 +1,346 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
-import { db } from "@/lib/firebase";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Calendar, User, ArrowRight, BookOpen } from "lucide-react";
-import { format } from "date-fns";
+import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore"
+import { db } from "@/lib/firebase"
+import { format } from "date-fns"
 
 interface Post {
-    id: string;
-    title: string;
-    slug: string;
-    excerpt: string;
-    coverImage: string;
-    authorName: string;
-    createdAt: any;
-    tags?: string[];
+  id: string
+  title: string
+  slug: string
+  excerpt: string
+  coverImage: string
+  authorName: string
+  createdAt: any
+  tags?: string[]
+}
+
+function PostCard({ post, delay }: { post: Post; delay: number }) {
+  const [hovered, setHovered] = useState(false)
+  const date = post.createdAt?.toDate ? format(post.createdAt.toDate(), "MMM d, yyyy") : null
+  const tag = post.tags?.[0]
+
+  return (
+    <div className="reveal" style={{ transitionDelay: `${delay}ms`, height: "100%" }}>
+      <Link
+        href={`/blog/view?slug=${post.slug}`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          background: hovered ? "#131e2e" : "#111B2B",
+          border: `1px solid ${hovered ? "rgba(0,212,255,0.3)" : "#1A2E44"}`,
+          borderTop: "2px solid #00D4FF",
+          textDecoration: "none",
+          transition: "background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s",
+          transform: hovered ? "translateY(-3px)" : "translateY(0)",
+          boxShadow: hovered ? "0 8px 32px rgba(0,212,255,0.1)" : "none",
+          overflow: "hidden",
+        }}
+      >
+        {/* Cover image */}
+        {post.coverImage && (
+          <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", overflow: "hidden", flexShrink: 0 }}>
+            <Image
+              src={post.coverImage}
+              alt={post.title}
+              fill
+              style={{
+                objectFit: "cover",
+                transition: "transform 0.4s ease",
+                transform: hovered ? "scale(1.04)" : "scale(1)",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to bottom, transparent 40%, rgba(17,27,43,0.7) 100%)",
+              }}
+            />
+          </div>
+        )}
+
+        {/* Content */}
+        <div style={{ padding: "24px", flex: 1, display: "flex", flexDirection: "column" }}>
+          {/* Meta row */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "14px", gap: "8px" }}>
+            {date && (
+              <span
+                style={{
+                  fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                  fontSize: "0.68rem",
+                  color: "#5A7A99",
+                  letterSpacing: "0.06em",
+                }}
+              >
+                {date}
+              </span>
+            )}
+            {tag && (
+              <span
+                style={{
+                  fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                  fontSize: "7px",
+                  letterSpacing: "0.14em",
+                  color: "#00D4FF",
+                  background: "rgba(0,212,255,0.08)",
+                  border: "1px solid rgba(0,212,255,0.2)",
+                  padding: "3px 8px",
+                  borderRadius: "2px",
+                  textTransform: "uppercase",
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                }}
+              >
+                {tag}
+              </span>
+            )}
+          </div>
+
+          {/* Title */}
+          <h3
+            style={{
+              fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+              fontWeight: 700,
+              fontSize: "1rem",
+              color: "#E8F0FE",
+              letterSpacing: "-0.015em",
+              lineHeight: "1.35",
+              marginBottom: "10px",
+            }}
+          >
+            {post.title}
+          </h3>
+
+          {/* Excerpt */}
+          <p
+            style={{
+              fontFamily: "var(--font-dm-sans, 'DM Sans', sans-serif)",
+              fontWeight: 300,
+              fontSize: "0.82rem",
+              color: "#5A7A99",
+              lineHeight: "1.75",
+              flex: 1,
+              marginBottom: "20px",
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            } as React.CSSProperties}
+          >
+            {post.excerpt}
+          </p>
+
+          {/* Footer */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              paddingTop: "16px",
+              borderTop: "1px solid #1A2E44",
+              gap: "8px",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-dm-sans, 'DM Sans', sans-serif)",
+                fontSize: "0.75rem",
+                color: "#5A7A99",
+              }}
+            >
+              {post.authorName && post.authorName !== "Admin" ? post.authorName : "OKS Team"}
+            </span>
+            <span
+              style={{
+                fontFamily: "var(--font-dm-sans, 'DM Sans', sans-serif)",
+                fontSize: "0.78rem",
+                color: hovered ? "#00D4FF" : "#5A7A99",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "5px",
+                transition: "color 0.2s",
+              }}
+            >
+              Read more
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 13 13"
+                fill="none"
+                style={{
+                  transform: hovered ? "translateX(3px)" : "translateX(0)",
+                  transition: "transform 0.2s",
+                  flexShrink: 0,
+                }}
+              >
+                <path
+                  d="M1.5 6.5H11.5M11.5 6.5L7.5 2.5M11.5 6.5L7.5 10.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </Link>
+    </div>
+  )
+}
+
+function SkeletonCard({ delay }: { delay: number }) {
+  return (
+    <div
+      style={{
+        background: "#111B2B",
+        border: "1px solid #1A2E44",
+        borderTop: "2px solid #1A2E44",
+        height: "360px",
+        transitionDelay: `${delay}ms`,
+      }}
+    >
+      <div style={{ width: "100%", aspectRatio: "16/9", background: "rgba(26,46,68,0.4)" }} />
+      <div style={{ padding: "24px", display: "flex", flexDirection: "column", gap: "12px" }}>
+        <div style={{ height: "8px", width: "60%", background: "rgba(26,46,68,0.6)", borderRadius: "2px" }} />
+        <div style={{ height: "16px", width: "90%", background: "rgba(26,46,68,0.6)", borderRadius: "2px" }} />
+        <div style={{ height: "12px", width: "100%", background: "rgba(26,46,68,0.4)", borderRadius: "2px" }} />
+        <div style={{ height: "12px", width: "80%", background: "rgba(26,46,68,0.4)", borderRadius: "2px" }} />
+      </div>
+    </div>
+  )
 }
 
 export default function BlogSection() {
-    const [posts, setPosts] = useState<Post[]>([]);
-    const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<Post[]>([])
+  const [loading, setLoading] = useState(true)
+  const sectionRef = useRef<HTMLElement>(null)
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                // Query latest 3 published posts
-                const q = query(
-                    collection(db, "posts"),
-                    where("status", "==", "published"),
-                    orderBy("createdAt", "desc"),
-                    limit(3)
-                );
-
-                const querySnapshot = await getDocs(q);
-                const postsData = querySnapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                })) as Post[];
-
-                setPosts(postsData);
-            } catch (error) {
-                console.error("Error fetching blog posts:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchPosts();
-    }, []);
-
-    // Don't render the section if there are no posts
-    if (!loading && posts.length === 0) {
-        return null;
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const q = query(
+          collection(db, "posts"),
+          where("status", "==", "published"),
+          orderBy("createdAt", "desc"),
+          limit(3)
+        )
+        const snapshot = await getDocs(q)
+        setPosts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })) as Post[])
+      } catch {
+        // silently fail — section just won't render
+      } finally {
+        setLoading(false)
+      }
     }
+    fetchPosts()
+  }, [])
 
-    return (
-        <section className="py-20 bg-gradient-to-b from-background to-primary/5">
-            <div className="container px-4">
-                {/* Section Header */}
-                <div className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4">
-                        <BookOpen className="h-4 w-4" />
-                        <span className="text-sm font-semibold">Latest Insights</span>
-                    </div>
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4">
-                        From Our <span className="text-primary">Blog</span>
-                    </h2>
-                    <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                        Stay updated with the latest insights on Odoo, AI automation, and digital transformation
-                    </p>
-                </div>
+  useEffect(() => {
+    if (loading) return
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
+      { threshold: 0.05 }
+    )
+    sectionRef.current?.querySelectorAll(".reveal").forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [loading])
 
-                {/* Blog Posts Grid */}
-                {loading ? (
-                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
-                        {[1, 2, 3].map((i) => (
-                            <div key={i} className="h-96 rounded-xl bg-muted animate-pulse" />
-                        ))}
-                    </div>
-                ) : (
-                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
-                        {posts.map((post) => (
-                            <Card
-                                key={post.id}
-                                className="group flex flex-col overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/50 bg-card/50 backdrop-blur"
-                            >
-                                <Link href={`/blog/view?slug=${post.slug}`} className="relative aspect-video w-full bg-muted overflow-hidden">
-                                    {post.coverImage ? (
-                                        <Image
-                                            src={post.coverImage}
-                                            alt={post.title}
-                                            fill
-                                            className="object-cover transition-transform group-hover:scale-110 duration-500"
-                                        />
-                                    ) : (
-                                        <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 text-primary">
-                                            <BookOpen className="h-12 w-12" />
-                                        </div>
-                                    )}
-                                    {/* Overlay on hover */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                </Link>
+  if (!loading && posts.length === 0) return null
 
-                                <CardHeader className="space-y-2">
-                                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                                        <div className="flex items-center gap-1">
-                                            <Calendar className="h-3 w-3" />
-                                            {post.createdAt?.toDate ? format(post.createdAt.toDate(), "MMM d, yyyy") : "N/A"}
-                                        </div>
-                                        {post.tags && post.tags.length > 0 && (
-                                            <Badge variant="secondary" className="text-[10px] px-2 py-0">
-                                                {post.tags[0]}
-                                            </Badge>
-                                        )}
-                                    </div>
-                                    <Link href={`/blog/view?slug=${post.slug}`} className="group-hover:text-primary transition-colors">
-                                        <h3 className="text-xl font-bold line-clamp-2 leading-tight">
-                                            {post.title}
-                                        </h3>
-                                    </Link>
-                                </CardHeader>
+  return (
+    <section
+      ref={sectionRef}
+      style={{ background: "#0D1420", borderTop: "1px solid #1A2E44", position: "relative", overflow: "hidden" }}
+    >
+      {/* Grid bg */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          backgroundImage:
+            "linear-gradient(to right, rgba(26,46,68,0.15) 1px, transparent 1px)," +
+            "linear-gradient(to bottom, rgba(26,46,68,0.15) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+        }}
+      />
 
-                                <CardContent className="flex-1">
-                                    <p className="text-muted-foreground line-clamp-3 text-sm leading-relaxed">
-                                        {post.excerpt}
-                                    </p>
-                                </CardContent>
-
-                                <CardFooter className="flex items-center justify-between border-t pt-4">
-                                    <div className="flex items-center text-sm font-medium">
-                                        <User className="mr-2 h-4 w-4 text-primary" />
-                                        {post.authorName && post.authorName !== "Admin" ? post.authorName : "Bevan"}
-                                    </div>
-                                    <Link
-                                        href={`/blog/view?slug=${post.slug}`}
-                                        className="text-primary hover:underline text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all"
-                                    >
-                                        Read More
-                                        <ArrowRight className="h-4 w-4" />
-                                    </Link>
-                                </CardFooter>
-                            </Card>
-                        ))}
-                    </div>
-                )}
-
-                {/* View All Button */}
-                <div className="text-center">
-                    <Button asChild size="lg" className="group">
-                        <Link href="/blog">
-                            View All Articles
-                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                    </Button>
-                </div>
+      <div className="relative z-10 mx-auto px-6 lg:px-12 py-20 md:py-28 max-w-7xl">
+        {/* Header */}
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "16px", marginBottom: "52px" }}>
+          <div>
+            <div
+              className="reveal"
+              style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "16px" }}
+            >
+              <span
+                style={{
+                  fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                  fontSize: "10px",
+                  letterSpacing: "0.2em",
+                  color: "#00D4FF",
+                  textTransform: "uppercase",
+                }}
+              >
+                LATEST INSIGHTS
+              </span>
+              <div style={{ width: "80px", height: "1px", background: "#1A2E44" }} />
             </div>
-        </section>
-    );
+            <h2
+              className="reveal"
+              style={{
+                fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+                fontWeight: 800,
+                fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)",
+                lineHeight: "1.08",
+                letterSpacing: "-0.03em",
+                color: "#E8F0FE",
+              }}
+            >
+              From the OKS blog.
+            </h2>
+          </div>
+          <Link
+            className="reveal"
+            href="/blog"
+            style={{
+              fontFamily: "var(--font-dm-sans, 'DM Sans', sans-serif)",
+              fontSize: "0.82rem",
+              color: "#5A7A99",
+              textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              transition: "color 0.2s",
+              flexShrink: 0,
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.color = "#E8F0FE")}
+            onMouseOut={(e) => (e.currentTarget.style.color = "#5A7A99")}
+          >
+            View all articles →
+          </Link>
+        </div>
+
+        {/* Cards */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "2px",
+          }}
+        >
+          {loading
+            ? [0, 1, 2].map((i) => <SkeletonCard key={i} delay={i * 80} />)
+            : posts.map((post, i) => <PostCard key={post.id} post={post} delay={i * 80} />)}
+        </div>
+      </div>
+    </section>
+  )
 }

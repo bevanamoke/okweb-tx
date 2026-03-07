@@ -206,6 +206,7 @@ export default function WhyChooseOKS() {
           >
             {/* Table header */}
             <div
+              className="oks-compare-row"
               style={{
                 display: "grid", gridTemplateColumns: "1fr 80px 80px",
                 borderBottom: "1px solid #1A2E44",
@@ -246,6 +247,7 @@ export default function WhyChooseOKS() {
             {COMPARE.map((row, i) => (
               <div
                 key={i}
+                className="oks-compare-row"
                 style={{
                   display: "grid", gridTemplateColumns: "1fr 80px 80px",
                   padding: "12px 20px",

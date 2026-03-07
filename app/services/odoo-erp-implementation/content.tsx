@@ -758,6 +758,7 @@ export default function OdooERPContent() {
         {/* Ghost label */}
         <div
           aria-hidden
+          className="ghost-label"
           style={{
             position: "absolute",
             top: "50%",
