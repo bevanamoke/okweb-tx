@@ -1,205 +1,344 @@
 "use client"
 
-import { Database, Bot, Code, ArrowRight, CheckCircle2, TrendingUp, Zap, Monitor } from "lucide-react"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import Link from "next/link"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 
-const solutions = [
+const SOLUTIONS = [
   {
-    id: "odoo-implementation",
-    title: "Odoo Implementation",
-    subtitle: "Unified ERP Systems",
-    description: "End-to-end Odoo implementation tailored to your unique business processes. We transform fragmented operations into a single, cohesive system.",
-    icon: Database,
+    index: "01",
+    title: "Odoo ERP\nImplementation",
+    subtitle: "Unified Business Infrastructure",
+    description:
+      "End-to-end Odoo deployment shaped around your actual operational processes — not vendor defaults. From multi-company setups to custom module development.",
+    color: "#00E87A",
+    borderAccent: "rgba(0,232,122,0.2)",
+    glowColor: "rgba(0,232,122,0.15)",
     capabilities: [
-      "Full System Configuration",
-      "Process Mapping",
-      "Data Migration & Cleaning",
-      "Custom Module Development",
-      "User Training & Support",
-      "Workflow Optimization",
-      "Financial Reporting Setup",
+      "Full system configuration & process mapping",
+      "Data migration and validation",
+      "Custom module development",
+      "Financial reporting & consolidation",
+      "Multi-branch / multi-currency support",
+      "User training and documentation",
     ],
     outcomes: [
-      "Centralized Operations",
-      "Real-time Data Visibility",
-      "Scalable Infrastructure",
-      "Reduced Manual Entry",
+      { label: "Operational silos", stat: "Eliminated" },
+      { label: "Manual data entry", stat: "↓ 80%" },
+      { label: "Reporting time",   stat: "↓ 70%" },
+      { label: "Deploy timeline",  stat: "< 6 wks" },
     ],
     link: "/odoo",
     cta: "Explore Odoo Services",
-    color: "primary",
   },
   {
-    id: "automation-services",
-    title: "Automation Services",
-    subtitle: "AI & Workflow Automation",
-    description: "Streamline workflows and eliminate repetitive tasks. We connect your apps and automate business logic to free up your team for high-value work.",
-    icon: Bot,
+    index: "02",
+    title: "AI & Workflow\nAutomation",
+    subtitle: "Eliminate Repetitive Operations",
+    description:
+      "We connect your tools and automate the manual work that consumes your team's day — invoice processing, lead routing, reporting, approvals, and more.",
+    color: "#00D4FF",
+    borderAccent: "rgba(0,212,255,0.2)",
+    glowColor: "rgba(0,212,255,0.15)",
     capabilities: [
-      "AI-Powered Workflows",
-      "App Integration (Zapier/Make)",
-      "Custom API Connectors",
-      "Chatbot Implementation",
-      "Automated Reporting",
-      "Lead Management Automation",
-      "Process Analysis",
+      "AI-powered document processing",
+      "Multi-app integration (Make / n8n / Zapier)",
+      "Custom API connectors",
+      "Automated reporting pipelines",
+      "Lead management & CRM automation",
+      "Chatbot & WhatsApp business flows",
     ],
     outcomes: [
-      "Reduced Operational Costs",
-      "Eliminated Human Error",
-      "24/7 Productivity",
-      "Faster Turnaround Times",
+      { label: "Staff hours reclaimed", stat: "40–70%" },
+      { label: "Human error rate",      stat: "Near 0" },
+      { label: "Availability",          stat: "24/7" },
+      { label: "Integration depth",     stat: "Full" },
     ],
     link: "/ai-automation",
-    cta: "View Automation",
-    color: "accent",
+    cta: "View Automation Services",
   },
   {
-    id: "web-development",
-    title: "Web Development",
-    subtitle: "High-Performance Digital Experiences",
-    description: "Modern websites and web applications built for speed, SEO, and conversion using cutting-edge technologies.",
-    icon: Code,
+    index: "03",
+    title: "Web & App\nDevelopment",
+    subtitle: "High-Performance Digital Systems",
+    description:
+      "Modern web applications, portals, and customer-facing platforms built for speed, SEO authority, and conversion — not templates.",
+    color: "#F5A623",
+    borderAccent: "rgba(245,166,35,0.2)",
+    glowColor: "rgba(245,166,35,0.15)",
     capabilities: [
-      "Next.js & React Applications",
-      "Custom UI/UX Design",
-      "Headless CMS Integration",
-      "E-commerce Solutions",
+      "Next.js / React web applications",
+      "Custom UI/UX — no templates",
+      "Odoo website & portal integration",
+      "E-commerce & payment systems",
       "Progressive Web Apps (PWA)",
-      "Performance Optimization",
-      "SEO Best Practices",
+      "Core Web Vitals optimization",
     ],
     outcomes: [
-      "Enhanced Brand Authority",
-      "Higher Conversion Rates",
-      "Seamless User Experience",
-      "Mobile-First Design",
+      { label: "Load performance",  stat: "< 1.5s" },
+      { label: "Mobile-first",      stat: "Always" },
+      { label: "SEO foundation",    stat: "Built-in" },
+      { label: "Post-launch care",  stat: "Included" },
     ],
     link: "/web-app-development",
     cta: "See Web Solutions",
-    color: "primary",
   },
 ]
 
 export default function Services() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
+      { threshold: 0.08 }
+    )
+    sectionRef.current?.querySelectorAll(".reveal").forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section id="solutions" className="py-20 md:py-32 px-4 bg-background relative overflow-hidden">
-      <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="text-center mb-16 md:mb-24">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold mb-6"
+    <section
+      id="solutions"
+      ref={sectionRef}
+      style={{ background: "#0D1420", borderTop: "1px solid #1A2E44", position: "relative", overflow: "hidden" }}
+    >
+      {/* Background grid */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          backgroundImage:
+            "linear-gradient(to right, rgba(26,46,68,0.25) 1px, transparent 1px)," +
+            "linear-gradient(to bottom, rgba(26,46,68,0.25) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto px-6 lg:px-12 py-20 md:py-28 max-w-7xl">
+
+        {/* Section label + headline */}
+        <div className="mb-16 md:mb-20">
+          <div
+            className="reveal"
+            style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "24px" }}
           >
-            Empowering Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Digital Evolution</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-xl text-foreground/70 max-w-2xl mx-auto"
+            <span
+              style={{
+                fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                fontSize: "10px", letterSpacing: "0.2em",
+                color: "#00D4FF", textTransform: "uppercase",
+              }}
+            >
+              §02 — CORE SOLUTIONS
+            </span>
+            <div style={{ flex: 1, height: "1px", background: "#1A2E44", maxWidth: "120px" }} />
+          </div>
+
+          <h2
+            className="reveal"
+            style={{
+              fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+              fontWeight: 800,
+              fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
+              lineHeight: "1.1",
+              letterSpacing: "-0.03em",
+              color: "#E8F0FE",
+              maxWidth: "640px",
+            }}
           >
-            Comprehensive solutions to modernize, automate, and scale your business.
-          </motion.p>
+            Three Pillars.<br />
+            <span style={{ color: "#5A7A99" }}>One Integrated Practice.</span>
+          </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-          {solutions.map((solution, idx) => (
-            <MagneticCard key={solution.id} className="h-full">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.2 }}
-                className="group relative h-full bg-card border border-border rounded-2xl p-8 md:p-10 hover:shadow-2xl hover:border-primary/50 transition-all duration-300 flex flex-col"
+        {/* Solution cards */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+          {SOLUTIONS.map((sol, idx) => (
+            <div
+              key={sol.index}
+              className="reveal"
+              style={{
+                border: "1px solid #1A2E44",
+                background: "#111B2B",
+                borderRadius: "4px",
+                overflow: "hidden",
+                transitionDelay: `${idx * 100}ms`,
+                transition: "border-color 0.3s, box-shadow 0.3s, background 0.3s",
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.borderColor = sol.borderAccent
+                e.currentTarget.style.boxShadow = `0 0 40px ${sol.glowColor}`
+                e.currentTarget.style.background = "#131e2e"
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.borderColor = "#1A2E44"
+                e.currentTarget.style.boxShadow = "none"
+                e.currentTarget.style.background = "#111B2B"
+              }}
+            >
+              {/* Top bar with index + title */}
+              <div
+                style={{
+                  borderBottom: "1px solid #1A2E44",
+                  padding: "0",
+                  display: "grid",
+                  gridTemplateColumns: "auto 1fr",
+                }}
               >
-                {/* Header */}
-                <div className="mb-8">
-                  <div className={`w-16 h-16 rounded-2xl bg-${solution.color}/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <solution.icon className={`w-8 h-8 text-${solution.color}`} />
+                {/* Index */}
+                <div
+                  style={{
+                    padding: "20px 24px",
+                    borderRight: "1px solid #1A2E44",
+                    display: "flex", alignItems: "center",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                      fontSize: "1.5rem", fontWeight: 500,
+                      color: sol.color, opacity: 0.5,
+                    }}
+                  >
+                    {sol.index}
+                  </span>
+                </div>
+
+                {/* Title block */}
+                <div style={{ padding: "20px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
+                  <div>
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+                        fontWeight: 700,
+                        fontSize: "clamp(1.1rem, 2vw, 1.4rem)",
+                        color: "#E8F0FE",
+                        letterSpacing: "-0.02em",
+                        lineHeight: 1.2,
+                        whiteSpace: "pre-line",
+                      }}
+                    >
+                      {sol.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                        fontSize: "9px", letterSpacing: "0.12em",
+                        color: sol.color, textTransform: "uppercase",
+                        marginTop: "4px",
+                      }}
+                    >
+                      {sol.subtitle}
+                    </p>
                   </div>
-                  <h3 className="text-3xl font-bold mb-2">{solution.title}</h3>
-                  <p className={`text-lg text-${solution.color} font-medium mb-4`}>{solution.subtitle}</p>
-                  <p className="text-foreground/70 leading-relaxed">{solution.description}</p>
+
+                  <Link
+                    href={sol.link}
+                    style={{
+                      display: "inline-flex", alignItems: "center", gap: "8px",
+                      fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+                      fontWeight: 700, fontSize: "0.75rem",
+                      color: sol.color, letterSpacing: "0.04em",
+                      textTransform: "uppercase", textDecoration: "none",
+                      transition: "gap 0.2s",
+                    }}
+                    onMouseOver={(e) => (e.currentTarget.style.gap = "14px")}
+                    onMouseOut={(e) => (e.currentTarget.style.gap = "8px")}
+                  >
+                    {sol.cta}
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 6H10M10 6L7 3M10 6L7 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Body: description + capabilities + outcomes */}
+              <div className="grid md:grid-cols-[1fr_1fr_auto] gap-0">
+                {/* Description */}
+                <div style={{ padding: "24px", borderRight: "1px solid #1A2E44" }}>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-dm-sans, 'DM Sans', sans-serif)",
+                      fontWeight: 300, fontSize: "0.9rem", lineHeight: "1.8",
+                      color: "#5A7A99",
+                    }}
+                  >
+                    {sol.description}
+                  </p>
                 </div>
 
                 {/* Capabilities */}
-                <div className="mb-8 flex-grow">
-                  <h4 className="text-sm font-bold uppercase tracking-wider text-foreground/50 mb-4">Key Capabilities</h4>
-                  <ul className="space-y-3">
-                    {solution.capabilities.map((cap, i) => (
-                      <li key={i} className="flex items-start gap-3 text-foreground/80">
-                        <CheckCircle2 className={`w-5 h-5 text-${solution.color} flex-shrink-0 mt-0.5`} />
-                        <span className="text-sm">{cap}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Outcomes */}
-                <div className={`bg-${solution.color}/5 rounded-xl p-6 mb-8 border border-${solution.color}/10`}>
-                  <h4 className="text-sm font-bold uppercase tracking-wider text-foreground/50 mb-3 flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4" /> Outcome
-                  </h4>
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                    {solution.outcomes.map((outcome, i) => (
-                      <div key={i} className="text-sm font-medium text-foreground/90">• {outcome}</div>
+                <div style={{ padding: "24px", borderRight: "1px solid #1A2E44" }}>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                      fontSize: "8px", letterSpacing: "0.15em",
+                      color: "#5A7A99", textTransform: "uppercase",
+                      marginBottom: "14px",
+                    }}
+                  >
+                    CAPABILITIES
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                    {sol.capabilities.map((cap, i) => (
+                      <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
+                        <span style={{ color: sol.color, fontSize: "0.7rem", marginTop: "1px", flexShrink: 0 }}>▸</span>
+                        <span
+                          style={{
+                            fontFamily: "var(--font-dm-sans, 'DM Sans', sans-serif)",
+                            fontSize: "0.82rem", color: "#E8F0FE", lineHeight: "1.5",
+                          }}
+                        >
+                          {cap}
+                        </span>
+                      </div>
                     ))}
                   </div>
                 </div>
 
-                {/* CTA */}
-                <div className="mt-auto">
-                  <Link href={solution.link} className={`inline-flex items-center gap-2 text-lg font-bold text-${solution.color} hover:gap-4 transition-all duration-300 group/link`}>
-                    {solution.cta}
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
+                {/* Outcomes */}
+                <div style={{ padding: "24px", minWidth: "180px" }}>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                      fontSize: "8px", letterSpacing: "0.15em",
+                      color: "#5A7A99", textTransform: "uppercase",
+                      marginBottom: "14px",
+                    }}
+                  >
+                    OUTCOMES
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                    {sol.outcomes.map((o, i) => (
+                      <div key={i}>
+                        <div
+                          style={{
+                            fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                            fontWeight: 500, fontSize: "1rem",
+                            color: sol.color, lineHeight: 1,
+                          }}
+                        >
+                          {o.stat}
+                        </div>
+                        <div
+                          style={{
+                            fontFamily: "var(--font-dm-sans, 'DM Sans', sans-serif)",
+                            fontSize: "0.72rem", color: "#5A7A99",
+                            marginTop: "2px",
+                          }}
+                        >
+                          {o.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
-            </MagneticCard>
+              </div>
+            </div>
           ))}
         </div>
       </div>
     </section>
-  )
-}
-
-function MagneticCard({ children, className = "" }: any) {
-  const ref = useRef<HTMLDivElement>(null)
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-
-  const mouseX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.1 })
-  const mouseY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 })
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const { clientX, clientY } = e
-    const { left, top, width, height } = ref.current!.getBoundingClientRect()
-    const center = { x: left + width / 2, y: top + height / 2 }
-    // Limit movement to small amount (e.g. 5px)
-    x.set((clientX - center.x) / 40)
-    y.set((clientY - center.y) / 40)
-  }
-
-  function handleMouseLeave() {
-    x.set(0)
-    y.set(0)
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ x: mouseX, y: mouseY }}
-      whileHover={{ y: -6 }}
-      className={className}
-    >
-      {children}
-    </motion.div>
   )
 }

@@ -1,118 +1,313 @@
 "use client"
 
-import { Settings, Users, Globe, FileText, LifeBuoy } from "lucide-react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 
-const differentiators = [
+const DIFFERENTIATORS = [
   {
-    icon: Settings,
-    text: "Industry-specific Odoo configurations",
+    num: "A",
+    title: "Industry-Specific Depth",
+    body: "We focus on education, hospitality, professional services, and retail — not every industry on earth. Depth over breadth delivers faster implementations and fewer surprises.",
+    color: "#00E87A",
   },
   {
-    icon: Users,
-    text: "Clean UI/UX tailored for non-technical users",
+    num: "B",
+    title: "Process-First, Software-Second",
+    body: "Before any configuration happens, we document and challenge your current workflows. We eliminate the process debt before it gets embedded in software.",
+    color: "#00D4FF",
   },
   {
-    icon: Globe,
-    text: "Local implementation with global standards",
+    num: "C",
+    title: "Local Presence, Global Standards",
+    body: "Our team is Nairobi-based with direct, in-person access. We implement to the same standards as top-tier global partners — without the offshore delivery lag.",
+    color: "#F5A623",
   },
   {
-    icon: FileText,
-    text: "Clear documentation and staff training",
+    num: "D",
+    title: "Clean UI for Non-Technical Users",
+    body: "We configure interfaces your staff can actually use. Adoption is the metric that matters — not feature count.",
+    color: "#00E87A",
   },
   {
-    icon: LifeBuoy,
-    text: "Ongoing support and optimization",
+    num: "E",
+    title: "Clear Documentation",
+    body: "Every deployment ships with full technical and user documentation. You own the knowledge, not just the software.",
+    color: "#00D4FF",
+  },
+  {
+    num: "F",
+    title: "Ongoing Optimization",
+    body: "Post-launch support isn't an upsell — it's standard. We monitor, tune, and evolve your system as your business scales.",
+    color: "#F5A623",
   },
 ]
 
-export default function WhyChooseOKS() {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  })
+const COMPARE = [
+  { aspect: "Process Analysis",        oks: true,  generic: false },
+  { aspect: "Industry-Specific Config", oks: true,  generic: false },
+  { aspect: "Custom Module Dev",        oks: true,  generic: "Optional (extra cost)" },
+  { aspect: "Staff Training",          oks: true,  generic: false },
+  { aspect: "Post-Launch Support",     oks: true,  generic: false },
+  { aspect: "Local Team",              oks: true,  generic: false },
+  { aspect: "Fixed-Scope Pricing",     oks: true,  generic: false },
+]
 
-  // Parallax effects
-  const yBg = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"])
-  const yFg = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"])
+export default function WhyChooseOKS() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
+      { threshold: 0.1 }
+    )
+    sectionRef.current?.querySelectorAll(".reveal").forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section ref={ref} className="py-20 md:py-32 px-4 relative overflow-hidden">
-      {/* Parallax Background */}
-      <motion.div style={{ y: yBg }} className="absolute inset-0 -z-20">
-        <div className="absolute inset-0 bg-background/90" />
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
-      </motion.div>
+    <section
+      ref={sectionRef}
+      style={{ background: "#060A10", borderTop: "1px solid #1A2E44", position: "relative", overflow: "hidden" }}
+    >
+      {/* Accent glow */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute", bottom: 0, left: "20%",
+          width: "600px", height: "400px",
+          background: "radial-gradient(circle, rgba(0,212,255,0.05) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
 
-      {/* Foreground shapes parallax */}
-      <motion.div style={{ y: yFg }} className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -z-10" />
-      <motion.div style={{ y: yBg }} className="absolute bottom-0 left-0 w-80 h-80 bg-accent/5 rounded-full blur-[80px] -z-10" />
+      <div className="relative z-10 mx-auto px-6 lg:px-12 py-20 md:py-28 max-w-7xl">
 
-      <div className="container mx-auto max-w-5xl relative z-10">
-        <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold mb-6"
+        {/* Section label */}
+        <div
+          className="reveal"
+          style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "48px" }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+              fontSize: "10px", letterSpacing: "0.2em",
+              color: "#F5A623", textTransform: "uppercase",
+            }}
           >
-            Why OKS
-          </motion.h2>
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-2xl md:text-3xl font-semibold text-primary mb-6"
-          >
-            Specialization beats generalization.
-          </motion.h3>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed"
-          >
-            We deliberately focus on two industries so we can deliver deeper expertise, faster implementations, and better outcomes.
-          </motion.p>
+            §03 — WHY OKS
+          </span>
+          <div style={{ flex: 1, height: "1px", background: "#1A2E44", maxWidth: "120px" }} />
         </div>
 
-        <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-3xl p-8 md:p-12 shadow-xl">
-          <h4 className="text-2xl font-bold mb-8 text-center">What Sets Us Apart</h4>
+        {/* Headline */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-16">
+          <h2
+            className="reveal"
+            style={{
+              fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+              fontWeight: 800,
+              fontSize: "clamp(1.9rem, 3.5vw, 3rem)",
+              lineHeight: "1.08",
+              letterSpacing: "-0.03em",
+              color: "#E8F0FE",
+            }}
+          >
+            Specialisation<br />
+            <span style={{ color: "#5A7A99" }}>beats generalisation.</span>
+          </h2>
+          <p
+            className="reveal"
+            style={{
+              fontFamily: "var(--font-dm-sans, 'DM Sans', sans-serif)",
+              fontWeight: 300, fontSize: "1.05rem", lineHeight: "1.8",
+              color: "#5A7A99",
+              alignSelf: "end",
+            }}
+          >
+            The Kenyan market is full of generalist IT vendors who will install anything for anyone. We deliberately narrowed our focus so we could deliver deeper expertise, faster deployments, and measurably better outcomes.
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {differentiators.map((item, idx) => {
-              const Icon = item.icon
-              return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="flex items-start gap-4"
+        {/* Two columns: differentiators + comparison table */}
+        <div className="grid lg:grid-cols-[1fr_400px] gap-8 items-start">
+
+          {/* Differentiator grid */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+              gap: "2px",
+            }}
+          >
+            {DIFFERENTIATORS.map((d, i) => (
+              <div
+                key={d.num}
+                className="reveal"
+                style={{
+                  border: "1px solid #1A2E44",
+                  background: "#111B2B",
+                  borderRadius: "4px",
+                  padding: "20px",
+                  transitionDelay: `${i * 60}ms`,
+                  transition: "border-color 0.2s, background 0.2s",
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.borderColor = d.color + "44"
+                  e.currentTarget.style.background = "#131e2e"
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.borderColor = "#1A2E44"
+                  e.currentTarget.style.background = "#111B2B"
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                      fontSize: "9px", color: d.color,
+                      letterSpacing: "0.1em",
+                      border: `1px solid ${d.color}33`,
+                      padding: "2px 7px", borderRadius: "2px",
+                    }}
+                  >
+                    {d.num}
+                  </span>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-syne, 'Syne', sans-serif)",
+                      fontWeight: 700, fontSize: "0.9rem",
+                      color: "#E8F0FE",
+                    }}
+                  >
+                    {d.title}
+                  </h3>
+                </div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-dm-sans, 'DM Sans', sans-serif)",
+                    fontWeight: 300, fontSize: "0.82rem",
+                    color: "#5A7A99", lineHeight: "1.7",
+                  }}
                 >
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <p className="font-medium text-foreground/90 pt-2">{item.text}</p>
-                </motion.div>
-              )
-            })}
+                  {d.body}
+                </p>
+              </div>
+            ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="mt-12 pt-8 border-t border-border/50 text-center"
+          {/* Comparison table */}
+          <div
+            className="reveal"
+            style={{
+              border: "1px solid #1A2E44",
+              background: "#0D1420",
+              borderRadius: "4px",
+              overflow: "hidden",
+            }}
           >
-            <p className="text-2xl font-serif italic text-foreground/80">"We speak both business and systems fluently."</p>
-          </motion.div>
+            {/* Table header */}
+            <div
+              style={{
+                display: "grid", gridTemplateColumns: "1fr 80px 80px",
+                borderBottom: "1px solid #1A2E44",
+                padding: "12px 20px",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                  fontSize: "8px", letterSpacing: "0.12em",
+                  color: "#5A7A99", textTransform: "uppercase",
+                }}
+              >
+                Feature
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                  fontSize: "8px", letterSpacing: "0.12em",
+                  color: "#00E87A", textTransform: "uppercase",
+                  textAlign: "center",
+                }}
+              >
+                OKS
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                  fontSize: "8px", letterSpacing: "0.12em",
+                  color: "#5A7A99", textTransform: "uppercase",
+                  textAlign: "center",
+                }}
+              >
+                Others
+              </span>
+            </div>
+
+            {COMPARE.map((row, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "grid", gridTemplateColumns: "1fr 80px 80px",
+                  padding: "12px 20px",
+                  borderBottom: i < COMPARE.length - 1 ? "1px solid #1A2E44" : "none",
+                  alignItems: "center",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "var(--font-dm-sans, 'DM Sans', sans-serif)",
+                    fontSize: "0.82rem", color: "#E8F0FE",
+                  }}
+                >
+                  {row.aspect}
+                </span>
+                <div style={{ textAlign: "center" }}>
+                  {row.oks ? (
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ margin: "0 auto" }}>
+                      <path d="M2 7L5.5 10.5L12 3.5" stroke="#00E87A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  ) : (
+                    <span style={{ color: "#F5A623", fontSize: "0.7rem" }}>—</span>
+                  )}
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  {row.generic === false ? (
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ margin: "0 auto" }}>
+                      <path d="M2 2L10 10M2 10L10 2" stroke="#1A2E44" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  ) : (
+                    <span
+                      style={{
+                        fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                        fontSize: "7px", color: "#5A7A99", letterSpacing: "0.05em",
+                      }}
+                    >
+                      {row.generic}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+
+            {/* Footer quote */}
+            <div
+              style={{
+                padding: "16px 20px",
+                borderTop: "1px solid #1A2E44",
+                background: "rgba(0,232,122,0.03)",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "var(--font-jetbrains, 'JetBrains Mono', monospace)",
+                  fontSize: "9px", letterSpacing: "0.1em",
+                  color: "#00E87A", textTransform: "uppercase",
+                }}
+              >
+                "We speak business and systems fluently."
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
